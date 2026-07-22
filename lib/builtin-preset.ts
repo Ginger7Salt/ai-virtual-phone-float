@@ -6,7 +6,7 @@ import type { PresetConfig } from "./settings-types";
 import { getCheckPhonePromptTags } from "./checkphone-config";
 
 export const BUILTIN_PRESET_ID = "builtin_default_v1";
-export const BUILTIN_PRESET_VERSION = 251; // 升版本会用出厂内容重写用户的内置预设副本（自定义会丢），非必要不升
+export const BUILTIN_PRESET_VERSION = 253; // 升版本会用出厂内容重写用户的内置预设副本（自定义会丢），非必要不升
 
 export function createBuiltinPreset(): PresetConfig {
     const now = Date.now();
@@ -433,7 +433,9 @@ export function createBuiltinPreset(): PresetConfig {
                     "【格式】[引用:原文]回复",
                     "",
                     "### 发表情包",
-                    "【格式】[表情包:表情包名]（表情包名必须从以下列表中选用：{{customStickers}}，若此列表为空，不得使用表情包）",
+                    "【格式】[表情包:表情包名]",
+                    "（当前可用的表情包：{{customStickers}}",
+                    "使用表情包时，必须从以上可用表情包选取，不得自创任何表情包，否则前端无法渲染。如果表情包列表为空，不得使用表情包）",
                     "",
                     "### 语音条",
                     "【格式】[语音条:语音内容文字]（只写说出口的话，禁止任何形式的动作描写）",
@@ -3839,6 +3841,7 @@ export function createBuiltinPreset(): PresetConfig {
                     "- 可包含互动元素：点击翻开信件、展开日记内容、查看照片描述、翻阅书页等",
                     "- 保持文学性和氛围感，结合角色的所有已知信息",
                     "- 页面宽度适配手机（max-width: 350px），背景透明或与粉色主题搭配",
+                    "- 移动端嵌入要求：请生成适合嵌入 iframe 的普通流式页面；不要给 html、body 或最外层容器设置 height: 100vh、100dvh、overflow: hidden、position: fixed 或 inset: 0；页面高度必须由内容自然撑开，并允许纵向滚动",
                     "- 只输出 ```html 代码块，不要其他内容",
                     "</dwelling_item_explore_instruction>",
                 ].join("\n"),
